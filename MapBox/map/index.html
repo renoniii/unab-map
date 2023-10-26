@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>UNAB MAP</title>
+
+    <!-------======= CSS -->
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" type="text/css" href="map.css">
+    <st rel="stylesheet" type="text/css" href="map.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-------======= JS -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/jscastro76/threebox@v.2.2.2/dist/threebox.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/gh/jscastro76/threebox@v.2.2.2/dist/threebox.css" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+</head>
+<body>
+    <div class="intro">
+        <h1 class="logo-header">
+            <span class="logo">UNAB</span><span class="logo">map.</span>
+        </h1>
+    </div>
+
+    <nav class="sidebar close">
+        <header>
+            <div class="image-text">
+                <span class="image">
+                    <img src="img/Grupo 7.png" alt="logo">
+                </span>
+
+                <div class="text header-text">
+                    <span class="name">UnabMap.</span>
+                    <span class="profession">aña.</span>
+                </div>
+            </div>
+
+            <i class='bx bx-chevron-right toggle'></i>
+        </header>
+
+        <div class="menu-bar">
+            <div class="menu">
+                <li class="search-box">
+                        <i class='bx bx-search-alt-2 icon' ></i>
+                        <input type="text" placeholder="Search...">
+                </li>
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-home-circle icon' ></i>
+                            <span class="text nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-home-circle icon' ></i>
+                            <span class="text nav-text">hola 2</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-home-circle icon' ></i>
+                            <span class="text nav-text">hola 3</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <li class="bottom-content">
+                    <a href="#">
+                        <i class='bx bx-home-circle icon' ></i>
+                        <span class="text nav-text">Logout</span>
+                    </a>
+                </li>
+
+                <li class="mode">
+                    <div class="moon-sun">
+                        <i class='bx bx-moon icon moon' ></i>
+                        <i class='bx bx-sun icon sun' ></i>
+                    </div>
+                    <span class="mode-text text">Dark Mode</span>
+
+                    <div class="toggle-switch">
+                        <span class="switch"></span>
+                    </div>
+
+                </li>
+            </div>
+
+        </div>
+    </nav>
+
+    <section class="home">
+        
+        <div class="map-container">
+            <div id="map"></div>
+                <script src='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
+                <script type="text/javascript" src="js/map.js"></script>
+        </div>
+
+        <div id="building-info" style="display: none;" class="building-popup">
+            <h2 id="building-name"></h2>
+            <p id="building-address"></p>
+            <p id="building-description"></p>
+          </div>
+
+    </section>
+
+    <script src="js/script.js"></script>
+
+    <script src="js/app.js"></script>
+
+    <script src="js/three.js"></script>
+ 
+</html>
