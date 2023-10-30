@@ -23,14 +23,42 @@ const body = document.querySelector("body"),
     });
 
 const optionMenu = document.querySelector(".select-menu"),
-        selectBtn = optionMenu.querySelector(".select-btn"),
-        options = optionMenu.querySelectorAll(".option"),
-        sBtn_text = optionMenu.querySelector(".sBtn-text");
+    selectBtn = optionMenu.querySelector(".select-btn"),
+    options = optionMenu.querySelectorAll(".option"),
+    sBtn_text = optionMenu.querySelector(".sBtn-text"),
+    optionSearch = optionMenu.querySelector(".optionSearch");
 
+optionSearch.addEventListener("keyup", function () {
+  const filter = optionSearch.value.toUpperCase();
+  for (let i = 0; i < options.length; i++) {
+    const li = options[i];
+    const textValue = li.textContent || li.innerText;
+    if (textValue.toUpperCase().indexOf(filter) > -1) {
+      li.style.display = "";
+    } else {
+      li.style.display = "none";
+    }
+  }
+});
+  
 const optionMenu2 = document.querySelector(".select-menu2"),
-        selectBtn2 = optionMenu2.querySelector(".select-btn2"),
-        options2 = optionMenu2.querySelectorAll(".option2"),
-        sBtn_text2 = optionMenu2.querySelector(".sBtn-text2");
+    selectBtn2 = optionMenu2.querySelector(".select-btn2"),
+    options2 = optionMenu2.querySelectorAll(".option2"),
+    sBtn_text2 = optionMenu2.querySelector(".sBtn-text2"),
+    optionSearch2 = optionMenu2.querySelector(".optionSearch2");
+
+optionSearch2.addEventListener("keyup", function () {
+  const filter = optionSearch2.value.toUpperCase();
+  for (let i = 0; i < options2.length; i++) {
+    const li = options2[i];
+    const textValue = li.textContent || li.innerText;
+    if (textValue.toUpperCase().indexOf(filter) > -1) {
+      li.style.display = "";
+    } else {
+      li.style.display = "none";
+    }
+  }
+});
 
 let isMenu1Open = false;
 let isMenu2Open = false;

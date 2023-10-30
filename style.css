@@ -25,7 +25,7 @@
 
 body{
     height: 100%;
-    background: var(--body-color);
+    background: var(--primary-color-light);
     transition: var(--tran-05);
     overflow: hidden;
 }
@@ -350,7 +350,6 @@ body.dark .switch::before{
     left: 0; 
 }
 
-
 .marker {
     background-image: url('https://cdn-icons-png.flaticon.com/512/684/684908.png');
     background-size: cover;
@@ -382,7 +381,6 @@ body.dark .switch::before{
     transition: var(--tran-05);
 }
 
-
 .select-btn i{
     font-size: 20px;
     color: var(--text-color);
@@ -408,14 +406,14 @@ body.dark .switch::before{
 }
 
 .select-menu .options{
-    position: relative;
-    padding: 20px;
-    margin-top: 10px;
-    border-radius: 8px;
+    max-height: 220px;
+    border-radius: 6px;
+    margin-top: 5px;
+    overflow-y: auto;
     color: var(--text-color);
+    overflow-y: auto;
     background: var(--primary-color-light);
     transition: var(--tran-05);
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
     display: none;
 }
 
@@ -432,10 +430,9 @@ body.dark .switch::before{
 }
 
 .options .option{
-    display: flex;
-    height: 55px;
+    height: 45px;
     cursor: pointer;
-    padding: 0 16px;
+    padding: 0 10px;
     border-radius: 6px;
     align-items: center;
     background: var(--primary-color-light);
@@ -452,6 +449,36 @@ body.dark .switch::before{
     transition: var(--tran-05);
     white-space: nowrap;
 }
+
+.select-menu .content{
+    position: relative;
+    padding: 10px;
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 8px;
+    color: var(--text-color);
+    background: var(--primary-color-light);
+    transition: var(--tran-05);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    display: none;
+    transition: var(--tran-05);
+}
+
+.select-menu.active .content{
+    display: block;
+}
+
+.search input{
+    width: 100%;
+    height: 45px;
+    font-size: 16px;
+    padding: 10px;
+    outline: 0;
+    border: 1px solid var(--primary-color-light);
+    border-radius: 6px;
+    transition: var(--tran-05);
+}
+
 
 /* ----------------- select menu2 ----------------- */
 .select-menu2{
@@ -474,7 +501,6 @@ body.dark .switch::before{
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     transition: var(--tran-05);
 }
-
 
 .select-btn2 i{
     font-size: 20px;
@@ -501,14 +527,14 @@ body.dark .switch::before{
 }
 
 .select-menu2 .options2{
-    position: relative;
-    padding: 20px;
-    margin-top: 10px;
-    border-radius: 8px;
+    max-height: 220px;
+    border-radius: 6px;
+    margin-top: 5px;
+    overflow-y: auto;
     color: var(--text-color);
+    overflow-y: auto;
     background: var(--primary-color-light);
     transition: var(--tran-05);
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
     display: none;
 }
 
@@ -525,10 +551,9 @@ body.dark .switch::before{
 }
 
 .options2 .option2{
-    display: flex;
-    height: 55px;
+    height: 45px;
     cursor: pointer;
-    padding: 0 16px;
+    padding: 0 10px;
     border-radius: 6px;
     align-items: center;
     background: var(--primary-color-light);
@@ -544,5 +569,34 @@ body.dark .switch::before{
     color: var(--text-color);
     transition: var(--tran-05);
     white-space: nowrap;
+}
+
+.select-menu2 .content2{
+    position: relative;
+    padding: 10px;
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 8px;
+    color: var(--text-color);
+    background: var(--primary-color-light);
+    transition: var(--tran-05);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    display: none;
+    transition: var(--tran-05);
+}
+
+.select-menu2.active .content2{
+    display: block;
+}
+
+.search2 input{
+    width: 100%;
+    height: 45px;
+    font-size: 16px;
+    padding: 10px;
+    outline: 0;
+    border: 1px solid var(--primary-color-light);
+    border-radius: 6px;
+    transition: var(--tran-05);
 }
   
