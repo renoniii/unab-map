@@ -12,11 +12,15 @@
     <!-------======= CSS -->
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet"/>
 
     <!-------======= JS -->
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+    <script src="https://unpkg.com/mapbox-gl-free-camera"></script>
+
 
     <script src="https://cdn.jsdelivr.net/gh/jscastro76/threebox@v.2.2.2/dist/threebox.min.js"></script>
     <link href="https://cdn.jsdelivr.net/gh/jscastro76/threebox@v.2.2.2/dist/threebox.css" rel="stylesheet">
@@ -53,7 +57,7 @@
 
                 <div class="select-menu">
                     <div class="select-btn">
-                        <span class="sBtn-text">Seleccione origen</span>
+                        <span class="sBtn-text" id="originSelect">Seleccione origen</span>
                         <i class="bx bx-chevron-down"></i>
                     </div>
                     <div class="content">
@@ -130,7 +134,7 @@
 
                 <div class="select-menu2">
                     <div class="select-btn2">
-                        <span class="sBtn-text2">Seleccione destino</span>
+                        <span class="sBtn-text2" id="destinationSelect">Seleccione destino</span>
                         <i class="bx bx-chevron-down"></i>
                     </div>
                     <div class="content2">
@@ -205,11 +209,11 @@
                     </div>
                 </div>
 
-                <ul class="menu-links">
+                <ul class="menu-links" id="calculateRoute">
                     <li class="nav-link">
                         <a href="#">
                             <i class='bx bx-home-circle icon' ></i>
-                            <span class="text nav-text">Dashboard</span>
+                            <span class="text nav-text">Mostar ruta</span>
                         </a>
                     </li>
                 </ul>

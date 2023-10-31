@@ -389,6 +389,7 @@ body.dark .switch::before{
 
 .select-menu .sBtn-text{
     white-space: nowrap;
+    transition: var(--tran-02);
 }
 
 .sidebar.close .sBtn-text{
@@ -510,6 +511,7 @@ body.dark .switch::before{
 
 .select-menu2 .sBtn-text2{
     white-space: nowrap;
+    transition: var(--tran-02);
 }
 
 .sidebar.close .sBtn-text2{
@@ -600,3 +602,4 @@ body.dark .switch::before{
     transition: var(--tran-05);
 }
   
+/* ----------------- boton ----------------- */
