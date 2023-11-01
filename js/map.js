@@ -207,22 +207,22 @@ map.on('load', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
     const coordinates = {
-      'Edificio L': [-73.10552104917086, 7.116410248939629],
-      'Biblioteca': [-73.10455813616838, 7.116491426104427],
-      'Edificio A': [-73.10531869830501, 7.117006239492608],
-      'Edificio K': [-73.10562292120848, 7.115958237783039],
-      'Edificio J': [-73.10548210520987, 7.1159688839790824],
-      'Edificio I': [ -73.10525814077576, 7.115979530175419],
-      'Edificio H': [-73.1049926021054, 7.116019453409494],
-      'Edificio G': [-73.10492823948422, 7.116173838382061 ],
-      'Edificio E': [-73.10513314535217, 7.116550974187346],
-      'Edificio F': [-73.10500703579545, 7.116502675291846],
-      'Edificio D': [-73.10518882302699, 7.117369562983552],
-      'Edificio N': [-73.10518882302699, 7.117369562983552],
-      'Edificio EA': [-73.1048518491465, 7.1169828690525625],
-      'Auditorio Mayor': [-73.10476647502816, 7.116913301890716],
-      'Auditorio Menor': [-73.10518882302699, 7.117369562983552],
-      'Auditorio Ingenierías': [-73.10521095073307, 7.116368588644064],
+      'Edificio L': [-73.10540005049819, 7.116243654244599],
+      'Biblioteca': [-73.1048009579892, 7.116269243191439],
+      'Edificio A': [-73.10536195812617, 7.116939388398805],
+      'Edificio K': [-73.10559540595513, 7.115895512929626],
+      'Edificio J': [-73.10549084124615, 7.115935200679047],
+      'Edificio I': [-73.10531764146307, 7.115837418937005],
+      'Edificio H': [-73.10503782854121, 7.11586047253104],
+      'Edificio G': [-73.10493148636156, 7.116113389234101],
+      'Edificio E': [-73.1051897489314, 7.116456725853993],
+      'Edificio F': [-73.10509085509008, 7.11647035163999],
+      'Edificio D': [-73.10511556115115, 7.117166477271439],
+      'Edificio N': [-73.10524098511817, 7.11735158843608],
+      'Edificio EA': [-73.10484541559677, 7.11700210897348],
+      'Auditorio Mayor': [-73.10483040489353, 7.116871685925119],
+      'Auditorio Menor': [-73.1050505318933, 7.117406063685024],
+      'Auditorio Ingenierías': [-73.10535452483298, 7.116117905601101],
       // Agrega las coordenadas para los otros lugares aquí
     };
   
@@ -236,24 +236,52 @@ document.addEventListener('DOMContentLoaded', () => {
       const originText = originSelect.innerText;
       const destinationText = destinationSelect.innerText;
 
-    const allowedRange = {
-      minLatitude: 7.1160526250352545, // Límite inferior de latitud
-      maxLatitude: 7.11795746697558, // Límite superior de latitud
-      minLongitude: -73.10581772183204, // Límite inferior de longitud
-      maxLongitude: -73.10416164124416, // Límite superior de longitud
-    };
+      const allowedRange = {
+        minLatitude: 7.1160526250352545, // Límite inferior de latitud
+        maxLatitude: 7.11795746697558, // Límite superior de latitud
+        minLongitude: -73.10581772183204, // Límite inferior de longitud
+        maxLongitude: -73.10416164124416, // Límite superior de longitud
+      };
   
+          // Elimina las capas y fuentes de los marcadores de origen y destino si existen
+      if (map.getLayer('origin-point')) {
+        map.removeLayer('origin-point');
+      }
+      if (map.getLayer('origin-point-white')) {
+        map.removeLayer('origin-point-white');
+      }
+      if (map.getLayer('destination-point')) {
+        map.removeLayer('destination-point');
+      }
+      if (map.getLayer('destination-point-white')) {
+        map.removeLayer('destination-point-white');
+      }
+      if (map.getSource('origin-point')) {
+        map.removeSource('origin-point');
+      }
+      if (map.getSource('origin-point-white')) {
+        map.removeSource('origin-point-white');
+      }
+      if (map.getSource('destination-point')) {
+        map.removeSource('destination-point');
+      }
+      if (map.getSource('destination-point-white')) {
+        map.removeSource('destination-point-white');
+      }
+
       if (originText === 'Seleccione origen' || destinationText === 'Seleccione destino') {
         // Asegúrate de que ambas selecciones se hayan realizado.
         return;
       }
-  
+
       // Obtiene las coordenadas de origen y destino
       const originCoords = coordinates[originText];
       const destinationCoords = coordinates[destinationText];
-  
+
+      sidebar.classList.toggle("close");
+
       if (originCoords && destinationCoords) {
-        // Hacer la solicitud de ruta
+        // Solicitud de ruta
         const query = await fetch(
           `https://api.mapbox.com/directions/v5/mapbox/walking/${originCoords[0]},${originCoords[1]};${destinationCoords[0]},${destinationCoords[1]}?steps=true&geometries=geojson&access_token=pk.eyJ1IjoicmVub25paWkiLCJhIjoiY2xsb2Nycmx5MDhhNTNkbjN0MDB6aWlmcCJ9.xpvSwfw6tyzCXUvvh8o9_g`,
           { method: 'GET' }
@@ -269,12 +297,12 @@ document.addEventListener('DOMContentLoaded', () => {
             'coordinates': route
           }
         };
-  
+
         // Si la ruta ya existe en el mapa, la reseteamos con setData
         if (map.getSource('route')) {
           map.getSource('route').setData(geojson);
         } else {
-          // De lo contrario, agregamos una nueva capa
+          // Agregamos nueva capa para la ruta
           map.addLayer({
             'id': 'route',
             'type': 'line',
@@ -287,27 +315,127 @@ document.addEventListener('DOMContentLoaded', () => {
               'line-cap': 'round'
             },
             'paint': {
-              'line-color': '#3887be',
-              'line-width': 5,
-              'line-opacity': 0.75
+              'line-color': '#0dc0d9',
+              'line-width': 9,
+              'line-opacity': 1
             }
           });
         }
 
-         map.flyTo({
-          center: destinationCoords, // El centro del mapa 
-          zoom: 21, // nivel de zoom deseado
-          speed: 1, // Velocidad de la animación
+        // Agregamos nuevas capas y fuentes para los marcadores de origen y destino
+        map.addLayer({
+          'id': 'origin-point-white',
+          'type': 'circle',
+          'source': {
+            'type': 'geojson',
+            'data': {
+              'type': 'FeatureCollection',
+              'features': [
+                {
+                  'type': 'Feature',
+                  'properties': {},
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': originCoords
+                  }
+                }
+              ]
+            }
+          },
+          'paint': {
+            'circle-radius': 10,
+            'circle-color': '#FFFFFF'
+          }
+        });
+
+        map.addLayer({
+          'id': 'origin-point',
+          'type': 'circle',
+          'source': {
+            'type': 'geojson',
+            'data': {
+              'type': 'FeatureCollection',
+              'features': [
+                {
+                  'type': 'Feature',
+                  'properties': {},
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': originCoords
+                  }
+                }
+              ]
+            }
+          },
+          'paint': {
+            'circle-radius': 7,
+            'circle-color': '#07ceae'
+          }
+        });
+
+        map.addLayer({
+          'id': 'destination-point-white',
+          'type': 'circle',
+          'source': {
+            'type': 'geojson',
+            'data': {
+              'type': 'FeatureCollection',
+              'features': [
+                {
+                  'type': 'Feature',
+                  'properties': {},
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': destinationCoords
+                  }
+                }
+              ]
+            }
+          },
+          'paint': {
+            'circle-radius': 10,
+            'circle-color': '#FFFFFF'
+          }
+        });
+
+        map.addLayer({
+          'id': 'destination-point',
+          'type': 'circle',
+          'source': {
+            'type': 'geojson',
+            'data': {
+              'type': 'FeatureCollection',
+              'features': [
+                {
+                  'type': 'Feature',
+                  'properties': {},
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': destinationCoords
+                  }
+                }
+              ]
+            }
+          },
+          'paint': {
+            'circle-radius': 7,
+            'circle-color': '#faa204'
+          }
+        });
+
+        map.flyTo({
+          center: destinationCoords,
+          zoom: 21,
+          speed: 1,
         });
 
         setTimeout(() => {
           map.flyTo({
-            center: originCoords, // El centro del mapa 
-            zoom: 21, // nivel de zoom deseado
-            speed: 0.5, // Velocidad de la animación
+            center: originCoords,
+            zoom: 21,
+            speed: 0.5,
           });
-        }, 1500); // 2000 milisegundos (2 segundos) de retraso, puedes ajustar este valor.
-
+        }, 1500);
       }
     }
   });
