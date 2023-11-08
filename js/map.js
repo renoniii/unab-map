@@ -83,25 +83,6 @@ map.on('style.load', () => {
   });
 });
 
-// Agrega un marcador para la ubicación del usuario
-const marker = new mapboxgl.Marker({
-  color: 'blue', // Puedes personalizar el color
-});
-
-// Obtén la ubicación del usuario
-if ('geolocation' in navigator) {
-  navigator.geolocation.watchPosition(
-    (position) => {
-      const userLocation = [position.coords.longitude, position.coords.latitude];
-      marker.setLngLat(userLocation).addTo(map);
-    },
-    (error) => console.error(error),
-    { enableHighAccuracy: true, maximumAge: 10000, timeout: 10000 }
-  );
-} else {
-  alert('Geolocalización no soportada en tu navegador.');
-}
-
 // origen: -73.10515204039719, 7.117600867770329
 // destino: -73.10485635258865, 7.116362027256661 
 
