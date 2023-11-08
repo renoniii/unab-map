@@ -1,3 +1,5 @@
+
+
 mapboxgl.accessToken = 'pk.eyJ1IjoicmVub25paWkiLCJhIjoiY2xsb2Nycmx5MDhhNTNkbjN0MDB6aWlmcCJ9.xpvSwfw6tyzCXUvvh8o9_g'
 
 var map = new mapboxgl.Map({
@@ -51,6 +53,39 @@ map.on('style.load', () => {
         }
     });
 });
+
+map.on('style.load', () => {
+  map.addLayer({
+      id: 'edificio-f',
+      type: 'custom',
+      renderingMode: '3d',
+      onAdd: function () {
+          const scale = 1;
+          const options = {
+              obj: 'edificios/edificio_f.gltf',
+              type: 'gltf',
+              scale: { x: scale, y: scale, z: 0 },
+              units: 'meters',
+              rotation: { x: 90, y: 90, z: 0 }
+          };
+          
+          tb.loadObj(options, (model) => {
+              model.setCoords([-73.10511365580805, 7.116343358845526]);
+              model.setRotation({ x: 0, y: 0, z: 0 });
+              tb.add(model);
+          });
+      },
+          
+      render: function () {
+          tb.update();
+      }
+  });
+});
+
+map.on('style.load', () => {
+  map.setConfigProperty('basemap', 'lightPreset', 'dusk');
+});
+
 
       // Agrega un marcador para la ubicación del usuario
       const marker = new mapboxgl.Marker({
@@ -437,4 +472,3 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   });
-  
