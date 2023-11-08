@@ -15,10 +15,10 @@ const body = document.querySelector("body"),
 
         if(body.classList.contains("dark")){
             modeText.innerText = "Light Mode"
-            map.setStyle(`mapbox://styles/mapbox/dark-v11`); 
+            map.setConfigProperty('basemap', 'lightPreset', 'dusk'); 
         }else{
             modeText.innerText = "Dark Mode"
-            map.setStyle(`mapbox://styles/mapbox/streets-v12`); 
+            map.setConfigProperty('basemap', 'lightPreset', 'day'); 
         }
     });
 

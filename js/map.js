@@ -1,22 +1,21 @@
-
-
 mapboxgl.accessToken = 'pk.eyJ1IjoicmVub25paWkiLCJhIjoiY2xsb2Nycmx5MDhhNTNkbjN0MDB6aWlmcCJ9.xpvSwfw6tyzCXUvvh8o9_g'
 
-var map = new mapboxgl.Map({
+const map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/renoniii/clmjnbima042e01madqscdoks',
+    style: "mapbox://styles/mapbox/standard-beta",
     center: [-73.1055606019952, 7.1167001059252236],
     zoom: 17.5,
     bearing: 90,
     pitch: 55
 });
 
+
 //límites del mapa
 const bounds = [
     [-73.10645,7.11553],
     [-73.10407,7.11767]
   ];
-  map.setMaxBounds(bounds);
+map.setMaxBounds(bounds);
 
 const tb = (window.tb = new Threebox(
     map,
@@ -40,12 +39,14 @@ map.on('style.load', () => {
                 units: 'meters',
                 rotation: { x: 90, y: -90, z: 0 }
             };
-            
             tb.loadObj(options, (model) => {
                 model.setCoords([-73.10525948321644, 7.116404712482975]);
                 model.setRotation({ x: 0, y: 0, z: 0 });
                 tb.add(model);
             });
+
+            map.setPaintProperty('edificio-e', 'fill-extrusion-color', ['interpolate', ['linear'], ['measure-light'], 0, '#000000', 1, '#FFFFFF']);
+            map.setPaintProperty('edificio-e', 'fill-extrusion-opacity', 0.6);
         },
             
         render: function () {
@@ -82,29 +83,24 @@ map.on('style.load', () => {
   });
 });
 
-map.on('style.load', () => {
-  map.setConfigProperty('basemap', 'lightPreset', 'dusk');
+// Agrega un marcador para la ubicación del usuario
+const marker = new mapboxgl.Marker({
+  color: 'blue', // Puedes personalizar el color
 });
 
-
-      // Agrega un marcador para la ubicación del usuario
-      const marker = new mapboxgl.Marker({
-        color: 'blue', // Puedes personalizar el color
-      });
-
-      // Obtén la ubicación del usuario
-      if ('geolocation' in navigator) {
-        navigator.geolocation.watchPosition(
-          (position) => {
-            const userLocation = [position.coords.longitude, position.coords.latitude];
-            marker.setLngLat(userLocation).addTo(map);
-          },
-          (error) => console.error(error),
-          { enableHighAccuracy: true, maximumAge: 10000, timeout: 10000 }
-        );
-      } else {
-        alert('Geolocalización no soportada en tu navegador.');
-      }
+// Obtén la ubicación del usuario
+if ('geolocation' in navigator) {
+  navigator.geolocation.watchPosition(
+    (position) => {
+      const userLocation = [position.coords.longitude, position.coords.latitude];
+      marker.setLngLat(userLocation).addTo(map);
+    },
+    (error) => console.error(error),
+    { enableHighAccuracy: true, maximumAge: 10000, timeout: 10000 }
+  );
+} else {
+  alert('Geolocalización no soportada en tu navegador.');
+}
 
 // origen: -73.10515204039719, 7.117600867770329
 // destino: -73.10485635258865, 7.116362027256661 
