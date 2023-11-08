@@ -24,26 +24,24 @@ const tb = (window.tb = new Threebox(
     }
 ));
 
-/*map.on('style.load', () => {
+map.on('style.load', () => {
     map.addLayer({
-        id: 'custom-threebox-model',
+        id: 'edificio-e',
         type: 'custom',
         renderingMode: '3d',
         onAdd: function () {
-            // Creative Commons License attribution:  Metlife Building model by https://sketchfab.com/NanoRay
-            // https://sketchfab.com/3d-models/metlife-building-32d3a4a1810a4d64abb9547bb661f7f3
             const scale = 1;
             const options = {
-                obj: 'https://docs.mapbox.com/mapbox-gl-js/assets/metlife-building.gltf',
+                obj: 'edificios/edificio_e.gltf',
                 type: 'gltf',
-                scale: { x: scale, y: scale, z: 2.7 },
+                scale: { x: scale, y: scale, z: 0 },
                 units: 'meters',
                 rotation: { x: 90, y: -90, z: 0 }
             };
             
             tb.loadObj(options, (model) => {
-                model.setCoords([-73.1055606019952, 7.1167001059252236]);
-                model.setRotation({ x: 0, y: 0, z: 241 });
+                model.setCoords([-73.10525948321644, 7.116404712482975]);
+                model.setRotation({ x: 0, y: 0, z: 0 });
                 tb.add(model);
             });
         },
@@ -52,7 +50,7 @@ const tb = (window.tb = new Threebox(
             tb.update();
         }
     });
-});*/
+});
 
       // Agrega un marcador para la ubicación del usuario
       const marker = new mapboxgl.Marker({
