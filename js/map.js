@@ -280,7 +280,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if (originText === 'Seleccione origen' || destinationText === 'Seleccione destino') {
-        // Asegúrate de que ambas selecciones se hayan realizado.
         return;
       }
 
